@@ -23,6 +23,7 @@ export default function ControlAereo() {
   const [mostrarModalOT, setMostrarModalOT] = useState(false);
   const [mostrarModalReemplazo, setMostrarModalReemplazo] = useState(false);
   const [mostrarModalSecciones, setMostrarModalSecciones] = useState(false);
+  const [mostrarModalPiloto, setMostrarModalPiloto] = useState(false);
   const [nuevaSeccionNombre, setNuevaSeccionNombre] = useState('');
   const [nuevoCargoInput, setNuevoCargoInput] = useState('');
   const [filtroSoloAlertas, setFiltroSoloAlertas] = useState(false);
@@ -37,6 +38,7 @@ export default function ControlAereo() {
 
   // Confirmaciones
   const [confirmarEliminarAvion, setConfirmarEliminarAvion] = useState(null);
+  const [confirmarEliminarPiloto, setConfirmarEliminarPiloto] = useState(null);
 
   // =========================================================================
   // SECCIONES ATA CONFIGURABLES
@@ -159,7 +161,7 @@ export default function ControlAereo() {
   ]);
 
   // =========================================================================
-  // TRIPULACIÓN (OPERACIONES)
+  // TRIPULACIÓN (OPERACIONES - RESTAURADO AL 100%)
   // =========================================================================
   const [capitanes, setCapitanes] = useState([
     {
@@ -171,7 +173,9 @@ export default function ControlAereo() {
       chequeoMedico: { fecha: '2025-10-12', intervaloMeses: 12 },
       chequeos: [
         { id: 1, equipo: 'CESSNA 172N', fecha: '2026-01-15', intervaloMeses: 12 },
-        { id: 2, equipo: 'PIPER PA-28', fecha: '2025-11-20', intervaloMeses: 12 }
+        { id: 2, equipo: 'PIPER PA-28', fecha: '2025-11-20', intervaloMeses: 12 },
+        { id: 3, equipo: 'PIPER PA-34', fecha: '', intervaloMeses: 12 },
+        { id: 4, equipo: 'CESSNA A150M', fecha: '', intervaloMeses: 12 }
       ],
       cursos: [
         { id: 1, curso: 'C.M', fecha: '2026-02-10', intervaloMeses: 12 },
@@ -180,12 +184,118 @@ export default function ControlAereo() {
         { id: 4, curso: 'Simulador', fecha: '2026-01-20', intervaloMeses: 6 }
       ]
     },
-    { id: 2, nombre: 'Juan Manuel Martinez', cedula: '---', fotoUrl: '', licencias: [{ tipo: 'PCA', numero: '---' }], chequeoMedico: { fecha: '', intervaloMeses: 12 }, chequeos: [], cursos: [] },
-    { id: 3, nombre: 'Juan Jose Otero', cedula: '---', fotoUrl: '', licencias: [{ tipo: 'PCA', numero: '---' }], chequeoMedico: { fecha: '', intervaloMeses: 12 }, chequeos: [], cursos: [] },
-    { id: 4, nombre: 'Ricardo Figueredo', cedula: '---', fotoUrl: '', licencias: [{ tipo: 'PCA', numero: '---' }, { tipo: 'IVA', numero: '---' }], chequeoMedico: { fecha: '', intervaloMeses: 12 }, chequeos: [], cursos: [] },
-    { id: 5, nombre: 'Jonathan Zuñiga', cedula: '---', fotoUrl: '', licencias: [{ tipo: 'PCA', numero: '---' }], chequeoMedico: { fecha: '', intervaloMeses: 12 }, chequeos: [], cursos: [] },
-    { id: 6, nombre: 'Omar Avendaño', cedula: '---', fotoUrl: '', licencias: [{ tipo: 'PCA', numero: '---' }, { tipo: 'IVA', numero: '---' }], chequeoMedico: { fecha: '', intervaloMeses: 12 }, chequeos: [], cursos: [] }
+    {
+      id: 2,
+      nombre: 'Juan Manuel Martinez',
+      cedula: '---',
+      fotoUrl: '',
+      licencias: [{ tipo: 'PCA', numero: '---' }],
+      chequeoMedico: { fecha: '', intervaloMeses: 12 },
+      chequeos: [
+        { id: 1, equipo: 'CESSNA 172N', fecha: '', intervaloMeses: 12 },
+        { id: 2, equipo: 'PIPER PA-28', fecha: '', intervaloMeses: 12 },
+        { id: 3, equipo: 'PIPER PA-34', fecha: '', intervaloMeses: 12 },
+        { id: 4, equipo: 'CESSNA A150M', fecha: '', intervaloMeses: 12 }
+      ],
+      cursos: [
+        { id: 1, curso: 'C.M', fecha: '', intervaloMeses: 12 },
+        { id: 2, curso: 'C.R.M', fecha: '', intervaloMeses: 12 },
+        { id: 3, curso: 'Mercancías Peligrosas', fecha: '', intervaloMeses: 24 },
+        { id: 4, curso: 'Simulador', fecha: '', intervaloMeses: 6 }
+      ]
+    },
+    {
+      id: 3,
+      nombre: 'Juan Jose Otero',
+      cedula: '---',
+      fotoUrl: '',
+      licencias: [{ tipo: 'PCA', numero: '---' }],
+      chequeoMedico: { fecha: '', intervaloMeses: 12 },
+      chequeos: [
+        { id: 1, equipo: 'CESSNA 172N', fecha: '', intervaloMeses: 12 },
+        { id: 2, equipo: 'PIPER PA-28', fecha: '', intervaloMeses: 12 },
+        { id: 3, equipo: 'PIPER PA-34', fecha: '', intervaloMeses: 12 },
+        { id: 4, equipo: 'CESSNA A150M', fecha: '', intervaloMeses: 12 }
+      ],
+      cursos: [
+        { id: 1, curso: 'C.M', fecha: '', intervaloMeses: 12 },
+        { id: 2, curso: 'C.R.M', fecha: '', intervaloMeses: 12 },
+        { id: 3, curso: 'Mercancías Peligrosas', fecha: '', intervaloMeses: 24 },
+        { id: 4, curso: 'Simulador', fecha: '', intervaloMeses: 6 }
+      ]
+    },
+    {
+      id: 4,
+      nombre: 'Ricardo Figueredo',
+      cedula: '---',
+      fotoUrl: '',
+      licencias: [{ tipo: 'PCA', numero: '---' }, { tipo: 'IVA', numero: '---' }],
+      chequeoMedico: { fecha: '', intervaloMeses: 12 },
+      chequeos: [
+        { id: 1, equipo: 'CESSNA 172N', fecha: '', intervaloMeses: 12 },
+        { id: 2, equipo: 'PIPER PA-28', fecha: '', intervaloMeses: 12 },
+        { id: 3, equipo: 'PIPER PA-34', fecha: '', intervaloMeses: 12 },
+        { id: 4, equipo: 'CESSNA A150M', fecha: '', intervaloMeses: 12 }
+      ],
+      cursos: [
+        { id: 1, curso: 'C.M', fecha: '', intervaloMeses: 12 },
+        { id: 2, curso: 'C.R.M', fecha: '', intervaloMeses: 12 },
+        { id: 3, curso: 'Mercancías Peligrosas', fecha: '', intervaloMeses: 24 },
+        { id: 4, curso: 'Simulador', fecha: '', intervaloMeses: 6 }
+      ]
+    },
+    {
+      id: 5,
+      nombre: 'Jonathan Zuñiga',
+      cedula: '---',
+      fotoUrl: '',
+      licencias: [{ tipo: 'PCA', numero: '---' }],
+      chequeoMedico: { fecha: '', intervaloMeses: 12 },
+      chequeos: [
+        { id: 1, equipo: 'CESSNA 172N', fecha: '', intervaloMeses: 12 },
+        { id: 2, equipo: 'PIPER PA-28', fecha: '', intervaloMeses: 12 },
+        { id: 3, equipo: 'PIPER PA-34', fecha: '', intervaloMeses: 12 },
+        { id: 4, equipo: 'CESSNA A150M', fecha: '', intervaloMeses: 12 }
+      ],
+      cursos: [
+        { id: 1, curso: 'C.M', fecha: '', intervaloMeses: 12 },
+        { id: 2, curso: 'C.R.M', fecha: '', intervaloMeses: 12 },
+        { id: 3, curso: 'Mercancías Peligrosas', fecha: '', intervaloMeses: 24 },
+        { id: 4, curso: 'Simulador', fecha: '', intervaloMeses: 6 }
+      ]
+    },
+    {
+      id: 6,
+      nombre: 'Omar Avendaño',
+      cedula: '---',
+      fotoUrl: '',
+      licencias: [{ tipo: 'PCA', numero: '---' }, { tipo: 'IVA', numero: '---' }],
+      chequeoMedico: { fecha: '', intervaloMeses: 12 },
+      chequeos: [
+        { id: 1, equipo: 'CESSNA 172N', fecha: '', intervaloMeses: 12 },
+        { id: 2, equipo: 'PIPER PA-28', fecha: '', intervaloMeses: 12 },
+        { id: 3, equipo: 'PIPER PA-34', fecha: '', intervaloMeses: 12 },
+        { id: 4, equipo: 'CESSNA A150M', fecha: '', intervaloMeses: 12 }
+      ],
+      cursos: [
+        { id: 1, curso: 'C.M', fecha: '', intervaloMeses: 12 },
+        { id: 2, curso: 'C.R.M', fecha: '', intervaloMeses: 12 },
+        { id: 3, curso: 'Mercancías Peligrosas', fecha: '', intervaloMeses: 24 },
+        { id: 4, curso: 'Simulador', fecha: '', intervaloMeses: 6 }
+      ]
+    }
   ]);
+
+  // Formulario Nuevo Piloto
+  const initialPilotoForm = {
+    nombre: '',
+    cedula: '',
+    tienePCA: true,
+    numPCA: '',
+    tieneIVA: false,
+    numIVA: ''
+  };
+  const [pilotoForm, setPilotoForm] = useState(initialPilotoForm);
 
   // =========================================================================
   // SÁBANA COMPLETA DE COMPONENTES HK5111-G (19 ÍTEMS ÚNICOS Y CONSECUTIVOS)
@@ -394,7 +504,6 @@ export default function ControlAereo() {
   // SÁBANA COMPLETA DE COMPONENTES HK2265-G (27 ÍTEMS ÚNICOS Y CONSECUTIVOS)
   // =========================================================================
   const componentesHK2265 = [
-    // 1. ENGINE RECIPROCATING (1 - 4)
     {
       id: 201,
       seccion: 'ENGINE RECIPROCATING',
@@ -437,7 +546,6 @@ export default function ControlAereo() {
         { id: '204b', service: 'R', tipoControl: 'CALENDARIO', intervalMeses: 4, complianceFecha: '2024-09-30' }
       ]
     },
-    // 2. ENGINE FUEL & CONTROL (5 - 6)
     {
       id: 205,
       seccion: 'ENGINE FUEL & CONTROL',
@@ -458,7 +566,6 @@ export default function ControlAereo() {
         { id: '206a', service: 'O', tipoControl: 'HORAS', referenciaBase: 'MOTOR', intervalHoras: '2000:00', complianceHoras: '4517:59' }
       ]
     },
-    // 3. IGNITION (7)
     {
       id: 207,
       seccion: 'IGNITION',
@@ -470,7 +577,6 @@ export default function ControlAereo() {
         { id: '207b', service: 'R/O', tipoControl: 'HORAS', referenciaBase: 'MOTOR', intervalHoras: '2000:00', complianceHoras: '4455:58' }
       ]
     },
-    // 4. ENGINE CONTROLS (8 - 10)
     {
       id: 208,
       seccion: 'ENGINE CONTROLS',
@@ -501,7 +607,6 @@ export default function ControlAereo() {
         { id: '210a', service: 'R', tipoControl: 'HORAS', referenciaBase: 'MOTOR', intervalHoras: '2000:00', complianceHoras: '4455:58' }
       ]
     },
-    // 5. STARTER (11)
     {
       id: 211,
       seccion: 'STARTER',
@@ -512,7 +617,6 @@ export default function ControlAereo() {
         { id: '211a', service: 'O', tipoControl: 'HORAS', referenciaBase: 'MOTOR', intervalHoras: '2000:00', complianceHoras: '4455:58' }
       ]
     },
-    // 6. VACUUM (12 - 15)
     {
       id: 212,
       seccion: 'VACUUM',
@@ -553,7 +657,6 @@ export default function ControlAereo() {
         { id: '215a', service: 'I', tipoControl: 'CALENDARIO', intervalMeses: 72, complianceFecha: '2019-12-02' }
       ]
     },
-    // 7. PROPELLER (16 - 19)
     {
       id: 216,
       seccion: 'PROPELLER',
@@ -598,7 +701,6 @@ export default function ControlAereo() {
         { id: '219b', service: 'O', tipoControl: 'CALENDARIO', intervalMeses: 72, complianceFecha: '2019-11-22' }
       ]
     },
-    // 8. POWER PLANT (20)
     {
       id: 220,
       seccion: 'POWER PLANT',
@@ -609,7 +711,6 @@ export default function ControlAereo() {
         { id: '220a', service: 'R', tipoControl: 'HORAS', referenciaBase: 'MOTOR', intervalHoras: '500:00', complianceHoras: '4580:23' }
       ]
     },
-    // 9. ELECTRICAL POWER (21)
     {
       id: 221,
       seccion: 'ELECTRICAL POWER',
@@ -620,7 +721,6 @@ export default function ControlAereo() {
         { id: '221a', service: 'O', tipoControl: 'HORAS', referenciaBase: 'MOTOR', intervalHoras: '2000:00', complianceHoras: '4455:58' }
       ]
     },
-    // 10. NAVIGATION AND PITOT STATIC / RAC (22 - 27)
     {
       id: 222,
       seccion: 'NAVIGATION AND PITOT STATIC / RAC',
@@ -803,94 +903,6 @@ export default function ControlAereo() {
     { id: 7, matricula: 'HK1687-G', modelo: 'PIPER PA-28-180', serie: '28-7525159', esBimotor: false, totalAvion: '0000:00', proximoSv: '0000:00', remanente: '00:00', totalMotor: '0000:00', durgMotor: '0000:00', totalHelice: '0000:00', durgHelice: '00:00', historial: [], componentes: [], ordenesTrabajo: [], reemplazos: [] },
     { id: 8, matricula: 'HK4915-G', modelo: 'AEROCOMMANDER 680E', serie: '680E-833-93', esBimotor: true, totalAvion: '0000:00', proximoSv: '0000:00', remanente: '00:00', totalMotorLH: '0000:00', durgMotorLH: '0000:00', totalMotorRH: '0000:00', durgMotorRH: '0000:00', totalHeliceLH: '0000:00', durgHeliceLH: '00:00', totalHeliceRH: '0000:00', durgHeliceRH: '00:00', historial: [], componentes: [], ordenesTrabajo: [], reemplazos: [] }
   ]);
-
-  // =========================================================================
-  // FORMULARIOS DE REGISTRO
-  // =========================================================================
-  // Formulario Componente
-  const initialComponenteForm = {
-    id: null,
-    seccion: 'ENGINE RECIPROCATING',
-    descripcion: '',
-    modelo: '',
-    sn: '',
-    servicios: [
-      {
-        id: 's_1',
-        service: 'I',
-        tipoControl: 'HORAS',
-        referenciaBase: 'MOTOR',
-        complianceHoras: '00:00',
-        intervalHoras: '500:00',
-        complianceFecha: new Date().toISOString().split('T')[0],
-        intervalMeses: 12
-      }
-    ]
-  };
-  const [componenteForm, setComponenteForm] = useState(initialComponenteForm);
-
-  // Formulario Orden de Trabajo
-  const initialOTForm = {
-    id: null,
-    fecha: new Date().toISOString().split('T')[0],
-    otav: '',
-    omav: '',
-    insp: false,
-    descrip: '',
-    inspEsp: false,
-    adsSb: false,
-    sid: false,
-    lru: false,
-    reman: false,
-    repil: false,
-    tipo: 'PROG',
-    tecnicos: [],
-    pasantes: [],
-    inspectores: [],
-    certificado: 'Sergio Castillo',
-    archivoUrl: ''
-  };
-  const [otForm, setOtForm] = useState(initialOTForm);
-
-  // Formulario Reemplazo
-  const initialReemplazoForm = {
-    fecha: new Date().toISOString().split('T')[0],
-    omav: '',
-    otav: '',
-    accion: 'REEMPLAZADO',
-    motivo: 'CUMPLIMIENTO DE HORAS',
-    horasAvion: '0000:00',
-    horasMotor: '0000:00',
-    componenteRemovido: { descripcion: '', modelo: '', sn: '', ttHoras: '0000:00' },
-    componenteInstalado: { descripcion: '', modelo: '', sn: '', ttHoras: '0000:00', certUrl: '' },
-    tallerRemision: '',
-    observaciones: ''
-  };
-  const [reemplazoForm, setReemplazoForm] = useState(initialReemplazoForm);
-
-  // Formulario Nueva Aeronave
-  const initialAvionForm = {
-    matricula: '',
-    modelo: '',
-    serie: '',
-    esBimotor: false,
-    totalAvion: '0000:00',
-    proximoSv: '0000:00',
-    remanente: '00:00',
-    totalMotor: '0000:00',
-    durgMotor: '0000:00',
-    totalHelice: '0000:00',
-    durgHelice: '00:00',
-    totalMotorLH: '0000:00',
-    durgMotorLH: '0000:00',
-    totalMotorRH: '0000:00',
-    durgMotorRH: '0000:00',
-    totalHeliceLH: '0000:00',
-    durgHeliceLH: '00:00',
-    totalHeliceRH: '0000:00',
-    durgHeliceRH: '00:00'
-  };
-  const [nuevoAvionForm, setNuevoAvionForm] = useState(initialAvionForm);
 
   // =========================================================================
   // MATEMÁTICAS DE TIEMPO Y CÁLCULOS TÉCNICOS
@@ -1126,6 +1138,44 @@ export default function ControlAereo() {
     setMostrarModalReemplazo(false);
   };
 
+  // Guardar y Eliminar Piloto en Operaciones
+  const guardarNuevoPiloto = (e) => {
+    e.preventDefault();
+    const licenciasIniciales = [];
+    if (pilotoForm.tienePCA) licenciasIniciales.push({ tipo: 'PCA', numero: pilotoForm.numPCA || '---' });
+    if (pilotoForm.tieneIVA) licenciasIniciales.push({ tipo: 'IVA', numero: pilotoForm.numIVA || '---' });
+
+    const nuevoPiloto = {
+      id: Date.now(),
+      nombre: pilotoForm.nombre,
+      cedula: pilotoForm.cedula || '---',
+      fotoUrl: '',
+      licencias: licenciasIniciales,
+      chequeoMedico: { fecha: '', intervaloMeses: 12 },
+      chequeos: [
+        { id: 1, equipo: 'CESSNA 172N', fecha: '', intervaloMeses: 12 },
+        { id: 2, equipo: 'PIPER PA-28', fecha: '', intervaloMeses: 12 },
+        { id: 3, equipo: 'PIPER PA-34', fecha: '', intervaloMeses: 12 },
+        { id: 4, equipo: 'CESSNA A150M', fecha: '', intervaloMeses: 12 }
+      ],
+      cursos: [
+        { id: 1, curso: 'C.M', fecha: '', intervaloMeses: 12 },
+        { id: 2, curso: 'C.R.M', fecha: '', intervaloMeses: 12 },
+        { id: 3, curso: 'Mercancías Peligrosas', fecha: '', intervaloMeses: 24 },
+        { id: 4, curso: 'Simulador', fecha: '', intervaloMeses: 6 }
+      ]
+    };
+    setCapitanes([...capitanes, nuevoPiloto]);
+    setPilotoForm(initialPilotoForm);
+    setMostrarModalPiloto(false);
+  };
+
+  const eliminarPiloto = (id) => {
+    setCapitanes(capitanes.filter(c => c.id !== id));
+    if (capitanSeleccionado?.id === id) setCapitanSeleccionado(null);
+    setConfirmarEliminarPiloto(null);
+  };
+
   const manejarSubidaFoto = (file, callback) => {
     if (!file) return;
     const reader = new FileReader();
@@ -1357,7 +1407,7 @@ export default function ControlAereo() {
   }
 
   // =========================================================================
-  // VISTA 2: TRIPULACIÓN (OPERACIONES)
+  // VISTA 2: TRIPULACIÓN (OPERACIONES - RESTAURADO CON CHEQUEOS, CURSOS Y CÉDULA)
   // =========================================================================
   if (vistaActual === 'OPERACIONES') {
     if (capitanSeleccionado) {
@@ -1369,6 +1419,7 @@ export default function ControlAereo() {
             </button>
           </div>
 
+          {/* CABECERA TRIPULACIÓN */}
           <div className="bg-[#111827] border border-slate-800 rounded-3xl p-6 mb-6 shadow-2xl">
             <div className="flex flex-wrap justify-between items-start gap-4">
               <div className="flex items-center gap-4">
@@ -1403,6 +1454,7 @@ export default function ControlAereo() {
                       setCapitanSeleccionado(act);
                     }}
                   />
+                  {/* LICENCIAS PCA E IVA */}
                   <div className="flex flex-wrap gap-2 mt-3">
                     {['PCA', 'IVA'].map(tipo => {
                       const tiene = capitanSeleccionado.licencias?.find(l => l.tipo === tipo);
@@ -1441,6 +1493,21 @@ export default function ControlAereo() {
                 </div>
               </div>
 
+              {/* CÉDULA DE CIUDADANÍA RESTAURADA */}
+              <div className="bg-slate-900 border border-slate-800 p-3.5 rounded-2xl">
+                <label className="text-[10px] font-bold text-slate-400 uppercase block">Cédula de Ciudadanía (C.C.)</label>
+                <input
+                  type="text"
+                  className="bg-[#1f2937] border border-slate-700 p-2 rounded-xl text-sm font-bold text-white mt-1 w-48"
+                  value={capitanSeleccionado.cedula || ''}
+                  onChange={(e) => {
+                    const act = { ...capitanSeleccionado, cedula: e.target.value };
+                    setCapitanes(capitanes.map(c => c.id === act.id ? act : c));
+                    setCapitanSeleccionado(act);
+                  }}
+                />
+              </div>
+
               {/* CHEQUEO MÉDICO */}
               <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
                 <span className="text-[10px] font-bold text-rose-400 uppercase tracking-wider block mb-1">🩺 Chequeo Médico</span>
@@ -1467,6 +1534,218 @@ export default function ControlAereo() {
                     }}
                   />
                 </div>
+                {capitanSeleccionado.chequeoMedico?.fecha && (
+                  <span className="text-[10px] font-mono text-emerald-400 mt-1 block">
+                    Vence: {calcularVencimientoFecha(capitanSeleccionado.chequeoMedico.fecha, capitanSeleccionado.chequeoMedico.intervaloMeses).fechaVenc}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* GRID DE CHEQUEOS Y CURSOS TOTALMENTE RESTAURADOS */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* SECCIÓN CHEQUEOS */}
+            <div className="bg-[#111827] border border-slate-800 rounded-3xl p-6 shadow-xl">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-lg font-black text-amber-400 uppercase flex items-center gap-2">
+                  ✈️ Chequeos de Aeronave
+                </h2>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const nuevo = { id: Date.now(), equipo: 'NUEVO EQUIPO', fecha: '', intervaloMeses: 12 };
+                    const act = { ...capitanSeleccionado, chequeos: [...(capitanSeleccionado.chequeos || []), nuevo] };
+                    setCapitanes(capitanes.map(c => c.id === act.id ? act : c));
+                    setCapitanSeleccionado(act);
+                  }}
+                  className="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1 rounded-xl text-xs font-bold uppercase"
+                >
+                  + Chequeo
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                {(capitanSeleccionado.chequeos || []).map((chk, idx) => {
+                  const estado = calcularVencimientoFecha(chk.fecha, chk.intervaloMeses);
+                  return (
+                    <div key={chk.id || idx} className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4">
+                      <div className="flex justify-between items-center mb-2">
+                        <input
+                          className="bg-transparent font-black text-sm text-white border-b border-transparent hover:border-slate-700"
+                          value={chk.equipo}
+                          onChange={(e) => {
+                            const nuevos = [...capitanSeleccionado.chequeos];
+                            nuevos[idx].equipo = e.target.value;
+                            const act = { ...capitanSeleccionado, chequeos: nuevos };
+                            setCapitanes(capitanes.map(c => c.id === act.id ? act : c));
+                            setCapitanSeleccionado(act);
+                          }}
+                        />
+                        <div className="flex items-center gap-2">
+                          {chk.fecha && (
+                            <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded ${estado.estado === 'ROJO' ? 'bg-rose-500/20 text-rose-400 border border-rose-500' : estado.estado === 'AMARILLO' ? 'bg-amber-400 text-slate-950 font-black' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'}`}>
+                              {estado.dias <= 0 ? 'VENCIDO' : `${estado.dias} DÍAS REM`}
+                            </span>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const nuevos = capitanSeleccionado.chequeos.filter((_, i) => i !== idx);
+                              const act = { ...capitanSeleccionado, chequeos: nuevos };
+                              setCapitanes(capitanes.map(c => c.id === act.id ? act : c));
+                              setCapitanSeleccionado(act);
+                            }}
+                            className="text-slate-500 hover:text-rose-400 p-1"
+                          >
+                            🗑️
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-2">
+                        <div>
+                          <label className="text-[9px] font-bold text-slate-500 uppercase block">Fecha Chequeo</label>
+                          <input
+                            type="date"
+                            className="w-full bg-[#1f2937] border border-slate-700 p-1.5 rounded-lg text-xs font-bold text-white mt-0.5"
+                            value={chk.fecha || ''}
+                            onChange={(e) => {
+                              const nuevos = [...capitanSeleccionado.chequeos];
+                              nuevos[idx].fecha = e.target.value;
+                              const act = { ...capitanSeleccionado, chequeos: nuevos };
+                              setCapitanes(capitanes.map(c => c.id === act.id ? act : c));
+                              setCapitanSeleccionado(act);
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <label className="text-[9px] font-bold text-slate-500 uppercase block">Intervalo (Meses)</label>
+                          <input
+                            type="number"
+                            className="w-full bg-[#1f2937] border border-slate-700 p-1.5 rounded-lg text-xs font-bold text-white mt-0.5"
+                            value={chk.intervaloMeses || 12}
+                            onChange={(e) => {
+                              const nuevos = [...capitanSeleccionado.chequeos];
+                              nuevos[idx].intervaloMeses = e.target.value;
+                              const act = { ...capitanSeleccionado, chequeos: nuevos };
+                              setCapitanes(capitanes.map(c => c.id === act.id ? act : c));
+                              setCapitanSeleccionado(act);
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <label className="text-[9px] font-bold text-slate-500 uppercase block">Vencimiento</label>
+                          <div className="bg-slate-800/80 border border-slate-700 p-1.5 rounded-lg text-xs font-mono font-bold text-slate-300 mt-0.5 text-center">
+                            {estado.fechaVenc}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* SECCIÓN CURSOS */}
+            <div className="bg-[#111827] border border-slate-800 rounded-3xl p-6 shadow-xl">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-lg font-black text-amber-400 uppercase flex items-center gap-2">
+                  🎓 Cursos y Entrenamiento
+                </h2>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const nuevo = { id: Date.now(), curso: 'NUEVO CURSO', fecha: '', intervaloMeses: 12 };
+                    const act = { ...capitanSeleccionado, cursos: [...(capitanSeleccionado.cursos || []), nuevo] };
+                    setCapitanes(capitanes.map(c => c.id === act.id ? act : c));
+                    setCapitanSeleccionado(act);
+                  }}
+                  className="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1 rounded-xl text-xs font-bold uppercase"
+                >
+                  + Curso
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                {(capitanSeleccionado.cursos || []).map((crs, idx) => {
+                  const estado = calcularVencimientoFecha(crs.fecha, crs.intervaloMeses);
+                  return (
+                    <div key={crs.id || idx} className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4">
+                      <div className="flex justify-between items-center mb-2">
+                        <input
+                          className="bg-transparent font-black text-sm text-white border-b border-transparent hover:border-slate-700"
+                          value={crs.curso}
+                          onChange={(e) => {
+                            const nuevos = [...capitanSeleccionado.cursos];
+                            nuevos[idx].curso = e.target.value;
+                            const act = { ...capitanSeleccionado, cursos: nuevos };
+                            setCapitanes(capitanes.map(c => c.id === act.id ? act : c));
+                            setCapitanSeleccionado(act);
+                          }}
+                        />
+                        <div className="flex items-center gap-2">
+                          {crs.fecha && (
+                            <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded ${estado.estado === 'ROJO' ? 'bg-rose-500/20 text-rose-400 border border-rose-500' : estado.estado === 'AMARILLO' ? 'bg-amber-400 text-slate-950 font-black' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'}`}>
+                              {estado.dias <= 0 ? 'VENCIDO' : `${estado.dias} DÍAS REM`}
+                            </span>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const nuevos = capitanSeleccionado.cursos.filter((_, i) => i !== idx);
+                              const act = { ...capitanSeleccionado, cursos: nuevos };
+                              setCapitanes(capitanes.map(c => c.id === act.id ? act : c));
+                              setCapitanSeleccionado(act);
+                            }}
+                            className="text-slate-500 hover:text-rose-400 p-1"
+                          >
+                            🗑️
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-2">
+                        <div>
+                          <label className="text-[9px] font-bold text-slate-500 uppercase block">Fecha Curso</label>
+                          <input
+                            type="date"
+                            className="w-full bg-[#1f2937] border border-slate-700 p-1.5 rounded-lg text-xs font-bold text-white mt-0.5"
+                            value={crs.fecha || ''}
+                            onChange={(e) => {
+                              const nuevos = [...capitanSeleccionado.cursos];
+                              nuevos[idx].fecha = e.target.value;
+                              const act = { ...capitanSeleccionado, cursos: nuevos };
+                              setCapitanes(capitanes.map(c => c.id === act.id ? act : c));
+                              setCapitanSeleccionado(act);
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <label className="text-[9px] font-bold text-slate-500 uppercase block">Intervalo (Meses)</label>
+                          <input
+                            type="number"
+                            className="w-full bg-[#1f2937] border border-slate-700 p-1.5 rounded-lg text-xs font-bold text-white mt-0.5"
+                            value={crs.intervaloMeses || 12}
+                            onChange={(e) => {
+                              const nuevos = [...capitanSeleccionado.cursos];
+                              nuevos[idx].intervaloMeses = e.target.value;
+                              const act = { ...capitanSeleccionado, cursos: nuevos };
+                              setCapitanes(capitanes.map(c => c.id === act.id ? act : c));
+                              setCapitanSeleccionado(act);
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <label className="text-[9px] font-bold text-slate-500 uppercase block">Vencimiento</label>
+                          <div className="bg-slate-800/80 border border-slate-700 p-1.5 rounded-lg text-xs font-mono font-bold text-slate-300 mt-0.5 text-center">
+                            {estado.fechaVenc}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -1474,39 +1753,160 @@ export default function ControlAereo() {
       );
     }
 
+    // LISTADO DE CAPITANES (CON REGISTRO Y ELIMINACIÓN)
     return (
       <main className="p-4 md:p-8 bg-[#0b1120] min-h-screen text-slate-100">
         <div className="flex justify-between items-center mb-6">
           <button onClick={() => navegarA('FLOTA')} className="text-amber-400 font-bold italic text-sm">
             ← VOLVER AL MENÚ PRINCIPAL
           </button>
+          <button
+            type="button"
+            onClick={() => {
+              setPilotoForm(initialPilotoForm);
+              setMostrarModalPiloto(true);
+            }}
+            className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-full text-xs font-black uppercase transition-colors"
+          >
+            + Registrar Capitán
+          </button>
         </div>
-        <h1 className="text-3xl font-black uppercase text-white mb-6">✈️ Tripulación de Vuelo</h1>
+
+        <div className="mb-8">
+          <h1 className="text-3xl font-black uppercase text-white flex items-center gap-3">
+            ✈️ Módulo de Operaciones — Tripulación de Vuelo
+          </h1>
+          <p className="text-slate-400 text-xs mt-1">Control de licencias, cédulas, chequeos de equipo y cursos recurrentes.</p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {capitanes.map((cap) => (
-            <div key={cap.id} className="bg-[#111827] border border-slate-800 p-5 rounded-2xl shadow-xl flex items-center gap-4">
-              {cap.fotoUrl ? (
-                <img src={cap.fotoUrl} alt="Foto" className="w-14 h-14 rounded-xl object-cover border border-amber-400" />
-              ) : (
-                <div className="w-14 h-14 rounded-xl bg-slate-800 flex items-center justify-center font-black text-amber-400 text-xl">
-                  {cap.nombre.charAt(0)}
+            <div key={cap.id} className="bg-[#111827] border border-slate-800 p-5 rounded-2xl shadow-xl flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center gap-3">
+                  {cap.fotoUrl ? (
+                    <img src={cap.fotoUrl} alt="Foto" className="w-12 h-12 rounded-xl object-cover border border-amber-400" />
+                  ) : (
+                    <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center font-black text-amber-400 text-lg">
+                      {cap.nombre.charAt(0)}
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start">
+                      <h3 onClick={() => setCapitanSeleccionado(cap)} className="text-lg font-black text-white hover:text-amber-400 cursor-pointer">
+                        {cap.nombre}
+                      </h3>
+                      {confirmarEliminarPiloto === cap.id ? (
+                        <div className="flex gap-1">
+                          <button onClick={() => eliminarPiloto(cap.id)} className="bg-rose-600 text-white px-2 py-0.5 rounded text-[9px] font-bold">SI</button>
+                          <button onClick={() => setConfirmarEliminarPiloto(null)} className="bg-slate-700 text-slate-300 px-2 py-0.5 rounded text-[9px] font-bold">NO</button>
+                        </div>
+                      ) : (
+                        <button onClick={() => setConfirmarEliminarPiloto(cap.id)} className="text-slate-600 hover:text-rose-400 p-1" title="Eliminar Capitán">
+                          🗑️
+                        </button>
+                      )}
+                    </div>
+                    {/* CÉDULA VISIBLE EN LA TARJETA */}
+                    <p className="text-slate-400 text-xs font-mono mt-0.5">C.C. {cap.cedula || 'Sin registrar'}</p>
+                  </div>
                 </div>
-              )}
-              <div className="flex-1">
-                <h3 onClick={() => setCapitanSeleccionado(cap)} className="text-lg font-black text-white hover:text-amber-400 cursor-pointer">
-                  {cap.nombre}
-                </h3>
-                <div className="flex flex-wrap gap-2 mt-1">
+
+                <div className="flex flex-wrap gap-2 mt-3">
                   {cap.licencias?.map((l, i) => (
-                    <span key={i} className="text-xs font-mono text-amber-300">
+                    <span key={i} className="text-xs font-mono text-amber-300 bg-slate-900 border border-slate-800 px-2 py-0.5 rounded">
                       <strong>{l.tipo}:</strong> {l.numero || '---'}
                     </span>
                   ))}
                 </div>
               </div>
+
+              <div className="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center">
+                <span className="text-[10px] text-slate-500 font-bold uppercase">{cap.chequeos?.length || 0} Chequeos | {cap.cursos?.length || 0} Cursos</span>
+                <button onClick={() => setCapitanSeleccionado(cap)} className="text-xs font-black text-amber-400 hover:text-amber-300">
+                  VER FICHA →
+                </button>
+              </div>
             </div>
           ))}
         </div>
+
+        {/* MODAL REGISTRAR NUEVO CAPITÁN */}
+        {mostrarModalPiloto && (
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-[#111827] text-white border border-slate-700 w-full max-w-md rounded-3xl p-6 shadow-2xl">
+              <h3 className="text-xl font-black mb-4 uppercase text-center text-amber-400">Registrar Nuevo Capitán</h3>
+              <form onSubmit={guardarNuevoPiloto} className="space-y-4">
+                <div>
+                  <label className="text-[10px] font-bold text-slate-400 uppercase block">Nombre Completo</label>
+                  <input
+                    required
+                    placeholder="Ej. Carlos Mendoza"
+                    className="w-full bg-[#1f2937] border border-slate-700 p-2.5 rounded-xl font-bold mt-1 text-sm text-white"
+                    value={pilotoForm.nombre}
+                    onChange={(e) => setPilotoForm({ ...pilotoForm, nombre: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold text-slate-400 uppercase block">Cédula de Ciudadanía</label>
+                  <input
+                    placeholder="Ej. 1098..."
+                    className="w-full bg-[#1f2937] border border-slate-700 p-2.5 rounded-xl font-bold mt-1 text-sm text-white"
+                    value={pilotoForm.cedula}
+                    onChange={(e) => setPilotoForm({ ...pilotoForm, cedula: e.target.value })}
+                  />
+                </div>
+                <div className="bg-slate-900 p-3 rounded-2xl border border-slate-800 space-y-3">
+                  <span className="text-[10px] font-bold text-amber-400 uppercase block">Licencias Iniciales</span>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        id="pca"
+                        checked={pilotoForm.tienePCA}
+                        onChange={(e) => setPilotoForm({ ...pilotoForm, tienePCA: e.target.checked })}
+                      />
+                      <label htmlFor="pca" className="text-xs font-bold w-12">PCA</label>
+                      {pilotoForm.tienePCA && (
+                        <input
+                          placeholder="# Licencia PCA"
+                          className="flex-1 bg-[#1f2937] border border-slate-700 p-1.5 rounded-lg text-xs font-mono text-white"
+                          value={pilotoForm.numPCA}
+                          onChange={(e) => setPilotoForm({ ...pilotoForm, numPCA: e.target.value })}
+                        />
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        id="iva"
+                        checked={pilotoForm.tieneIVA}
+                        onChange={(e) => setPilotoForm({ ...pilotoForm, tieneIVA: e.target.checked })}
+                      />
+                      <label htmlFor="iva" className="text-xs font-bold w-12">IVA</label>
+                      {pilotoForm.tieneIVA && (
+                        <input
+                          placeholder="# Licencia IVA"
+                          className="flex-1 bg-[#1f2937] border border-slate-700 p-1.5 rounded-lg text-xs font-mono text-white"
+                          value={pilotoForm.numIVA}
+                          onChange={(e) => setPilotoForm({ ...pilotoForm, numIVA: e.target.value })}
+                        />
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3 pt-2">
+                  <button type="submit" className="bg-amber-400 text-slate-950 py-3 rounded-xl font-black uppercase text-xs">
+                    Guardar
+                  </button>
+                  <button type="button" onClick={() => setMostrarModalPiloto(false)} className="bg-slate-800 text-slate-300 py-3 rounded-xl font-bold uppercase text-xs">
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
       </main>
     );
   }
@@ -2879,7 +3279,7 @@ export default function ControlAereo() {
                   </div>
                   <div>
                     <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Próximo SV</label>
-                    <input className="w-full bg-[#1f2937] border border-slate-700 p-2.5 rounded-xl font-bold mt-1 text-white font-mono" value={avionSeleccionado.proximoSv} onChange={(e) => setAvionSeleccionado({...avionSeleccionado, proximoSv: e.target.value})} />
+                    <input className="w-full bg-[#1f2937] border border-slate-700 p-2.5 rounded-xl font-bold mt-1 text-white font-mono" value={avionSeleccionado.proximoSv} onChange={(e) => setAvionSeleccionado({...avionSeleccionado, totalAvion: e.target.value})} />
                   </div>
                 </div>
 
@@ -3069,7 +3469,7 @@ export default function ControlAereo() {
                     <button onClick={() => setConfirmarEliminarAvion(null)} className="bg-slate-700 text-slate-300 px-2 py-1 rounded text-[9px] font-bold">NO</button>
                   </div>
                 ) : (
-                  <button onClick={() => setConfirmarEliminarAvion(av.id)} className="text-slate-600 hover:text-rose-400 p-1.5" title="Eliminar Aeronave">
+                  <button onClick={() => setConfirmarEliminarAvion(av.id)} className="text-slate-600 hover:text-rose-400 p-1.5">
                     🗑️
                   </button>
                 )}
